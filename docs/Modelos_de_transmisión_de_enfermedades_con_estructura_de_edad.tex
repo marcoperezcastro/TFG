@@ -1,0 +1,539 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Modelos de transmisión de enfermedades con estructura de edad},
+  pdfauthor={Marco Pérez Castro},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\usepackage[normalem]{ulem}
+% Avoid problems with \sout in headers with hyperref
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, spanish, es-noshorthands]{babel}
+%% FONTS: libertine+biolinum+stix
+\usepackage[mono=false]{libertine}
+\usepackage[notext]{stix}
+
+% =====================
+% = Datos importantes =
+% =====================
+% hay que rellenar estos datos y luego
+% ir a \begin{document}
+
+\title{Modelos de transmisión de enfermedades con estructura de edad}
+\author{Marco Pérez Castro}
+\date{\today}
+\newcommand{\tutores}[1]{\newcommand{\guardatutores}{#1}}
+\tutores{María Ángeles Rodríguez Bellido \\
+         Daniel Franco Coronil}
+
+% ======================
+% = Páginas de títulos =
+% ======================
+\makeatletter
+\edef\maintitle{\@title}
+\renewcommand\maketitle{%
+  \begin{titlepage}
+      \vspace*{1.5cm}
+      \parskip=0pt
+      \Huge\bfseries
+      \begin{center}
+          \leavevmode\includegraphics[totalheight=6cm]{sello.png}\\[2cm]
+          \@title
+      \end{center}
+      \vspace{1cm}
+      \begin{center}
+          \@author
+      \end{center}
+  \end{titlepage}
+  
+  \begin{titlepage}
+  \parindent=0pt
+  \begin{flushleft}
+  \vspace*{1.5mm}
+  \setlength\baselineskip{0pt}
+  \setlength\parskip{0mm}
+  \begin{center}
+      \leavevmode\includegraphics[totalheight=4.5cm]{sello.png}
+  \end{center}
+  \end{flushleft}
+  \vspace{1cm}
+  \bgroup
+  \Large \bfseries
+  \begin{center}
+  \@title
+  \end{center}
+  \egroup
+  \vspace*{.5cm}
+  \begin{center}
+  \@author
+  \end{center}
+  \vspace*{1.8cm}
+  \begin{flushright}
+  \begin{minipage}{8.45cm}
+      Memoria presentada como parte de los requisitos para la obtención del título de
+      Grado en Matemáticas por la Universidad de Sevilla.
+
+      \vspace*{7.5mm}
+
+      Tutorizada por
+      % \vspace*{5mm}
+  \end{minipage}\par
+  \begin{tabularx}{8.45cm}[b]{@{}l}
+      \guardatutores
+  \end{tabularx}
+   \end{flushright}
+      \vspace*{\fill}
+   \end{titlepage}
+   %%% Esto es necesario...
+   \pagestyle{tfg}
+   \renewcommand{\chaptermark}[1]{\markright{\thechapter.\space ##1}}
+   \renewcommand{\sectionmark}[1]{}
+   \renewcommand{\subsectionmark}[1]{}
+  }
+\makeatother
+
+% ======================================
+% = Color de la Universidad de Sevilla =
+% ======================================
+\usepackage{tikz}
+\definecolor{USred}{cmyk}{0,1.00,0.65,0.34}
+
+% =========
+% = Otros =
+% =========
+\usepackage[]{tabularx}
+\usepackage[]{enumitem}
+\setlist{noitemsep}
+
+% ==========================
+% = Matemáticas y teoremas =
+% ==========================
+\usepackage[]{amsmath}
+\usepackage[]{amsthm}
+\usepackage[]{mathtools}
+\usepackage[]{bm}
+\usepackage[]{thmtools}
+\newcommand{\marcador}{\vrule height 10pt depth 2pt width 2pt \hskip .5em\relax}
+\newcommand{\cabeceraespecial}{%
+    \color{USred}%
+    \normalfont\bfseries}
+\declaretheoremstyle[
+    spaceabove=\medskipamount,
+    spacebelow=\medskipamount,
+    headfont=\cabeceraespecial\marcador,
+    notefont=\cabeceraespecial,
+    notebraces={(}{)},
+    bodyfont=\normalfont\itshape,
+    postheadspace=1em,
+    numberwithin=chapter,
+    headindent=0pt,
+    headpunct={.}
+    ]{importante}
+\declaretheoremstyle[
+    spaceabove=\medskipamount,
+    spacebelow=\medskipamount,
+    headfont=\normalfont\itshape\color{USred},
+    notefont=\normalfont,
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=1em,
+    numberwithin=chapter,
+    headindent=0pt,
+    headpunct={.}
+    ]{normal}
+\declaretheoremstyle[
+    spaceabove=\medskipamount,
+    spacebelow=\medskipamount,
+    headfont=\normalfont\itshape\color{USred},
+    notefont=\normalfont,
+    notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=1em,
+    headindent=0pt,
+    headpunct={.},
+    numbered=no,
+    qed=\color{USred}\marcador
+    ]{demostracion}
+
+% Los nombres de los enunciados. Añade los que necesites.
+%\declaretheorem[name=Observaci\'on, style=normal]{remark}
+%\declaretheorem[name=Corolario, style=normal]{corollary}
+%\declaretheorem[name=Proposici\'on, style=normal]{proposition}
+%\declaretheorem[name=Lema, style=normal]{lemma}
+
+%\declaretheorem[name=Teorema, style=importante]{theorem}
+%\declaretheorem[name=Definici\'on, style=importante]{definition}
+
+\let\proof=\undefined
+%\declaretheorem[name=Demostraci\'on, style=demostracion]{proof}
+
+%\AtBeginDocument{\declaretheorem[name=Teorema, style=importante]{theorem}}
+
+% ============================
+% = Composición de la página =
+% ============================
+\usepackage[
+	a4paper,
+    textwidth=80ex,
+]{geometry}
+
+\linespread{1.069}
+\parskip=10pt plus 1pt minus .5pt
+\frenchspacing
+% \raggedright
+
+
+% ==============================
+% = Composición de los títulos =
+% ==============================
+
+\usepackage[explicit]{titlesec}
+
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]
+    {\Huge\sffamily\bfseries}
+    {\thechapter\hsp\textcolor{USred}{\vrule width 2pt}\hsp}{0pt}
+    {#1}
+\titleformat{\section}
+  {\normalfont\Large\sffamily\bfseries}{\thesection\space\space}
+  {1ex}
+  {#1}
+\titleformat{\subsection}
+  {\normalfont\large\sffamily}{\thesubsection\space\space}
+  {1ex}
+  {#1}
+
+% =======================
+% = Cabeceras de página =
+% =======================
+\usepackage[]{fancyhdr}
+\usepackage[]{emptypage}
+\fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{tfg}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[LE]{{\normalsize\color{USred}\bfseries\thepage}\quad
+                    \small\textsc{\MakeLowercase{\maintitle}}}
+    \fancyhead[RO]{\small\textsc{\MakeLowercase{\rightmark}}%
+                    \quad{\normalsize\bfseries\color{USred}\thepage}}%
+                    }
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Modelos de transmisión de enfermedades con estructura de edad}
+\author{Marco Pérez Castro}
+\date{Compilidado por última vez el 23 de noviembre a las 17:48, 2020}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{hacer}{%
+\chapter*{Cosas que hacer}\label{hacer}}
+\addcontentsline{toc}{chapter}{Cosas que hacer}
+
+\begin{itemize}
+\tightlist
+\item
+  En el PDF, cuando pincho en `modelo', me lleva a la pagina 1 del pdf.
+\item
+  Espaciado dentro de ecuaciones.
+\item
+  Ajustar los entornos de teorema, definiciones etc para que salgan en el PDF sin tener que modificarlo y cambiar el estilo de los teoremas del html.
+\item
+  \sout{Poner referencia al modelo ---\textgreater{} ``el modelo (1)''.}
+\item
+  \sout{Las ecuaciones del modelo están demasiado a su bola}.
+\item
+  Que esta cosa sea pulsable entera, no solo el número: \textbf{sección \ref{sec3}}
+\item
+  Quiero que el nombre de cada capítulo sea ``Capítulo x, nombre''.
+\item
+  Mejorar la apariencia de la sección de referencias.
+\item
+  Estilo de la página de referencias.
+\item
+  Cambiar el resaltado de código de Python. Así se ve demasiado plano y resulta difícil leerlo.
+\item
+  \sout{Experimentar con el PDF autogenerado. Se ve muy cutre} Ya se ve estiloso.
+\item
+  Cuando se le da a editar, que lleve a la página adecuada de Github para poder crear un request.
+\item
+  Probar los distintos temas de la página (tema claro u oscuro).
+\item
+  Añadir icono web.
+\item
+  Tontear con la estética en general.
+\item
+  En la tabla de contenidos se ve mal el R(psi).
+\end{itemize}
+
+\hypertarget{english-abstract}{%
+\chapter*{English Abstract}\label{english-abstract}}
+\addcontentsline{toc}{chapter}{English Abstract}
+
+According to the guidelines, every dissertation should include a short english abstract at the beginning. In the abstract, you describe in general terms what is your dissertation about, the main points you want to make, and any important consequences that may arise.
+
+\textbf{Esto iría al principio del documento.} De momento se queda aquí porque me resulta más util ver primero las cosas que hay que hacer.
+
+\hypertarget{resumen-del-artuxedculo}{%
+\chapter{Resumen del artículo}\label{resumen-del-artuxedculo}}
+
+En esta sección hago un resumen del artículo \citet{castillo-chavez_global_1998}.
+
+\hypertarget{abstract}{%
+\section*{Abstract}\label{abstract}}
+\addcontentsline{toc}{section}{Abstract}
+
+Estudio de un modelo de transmisión de la tuberculosis en una población bajo un programa de vacunación. En primer lugar se verá que la población alcanza un estado libre de infección globalmente estable si el número de reproducción básica \(\mathscr{R_0}\) es menor que uno, y que existirá un estado endémico en la población si el número anterior bajo vacunación es mayor que uno. A continuación se aplicarán los resultados teóricos a políticas de vacunación para determinar la edad o edades óptimas a la que un sujeto debería de vacunarse. Veremos que la estrategia óptima será vacunar en un año o en dos años.
+
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+La tuberculosis es una enfermedad infecciosa que se transmite principalmente por las vías aéreas. El riesgo de que una persona se contagie de esta enfermedad está fuertemente relacionado con la probabilidad de estar en contacto con una persona infectada y con la cercanía y duración del contacto. Hay evidencias de que los casos de tuberculosis son muy dependientes de la edad. \textbf{En 1992 aproximadamente 100 millones de recién nacidos y niños recibieron la vacuna contra la tuberculosis \emph{Bacillus de Calmette y Guérin} (BCG). Esta vacuna ha sido una de las más usadas durante la década de los 90} {[}ver \ref{old}{]}. A pesar de su amplio uso, la efectividad de BCG en prevenir la tuberculosis ha sido controvertida. Estudios de campo de la vacuna han tenido resultados muy distintos, algunos mostrando una efectividad en prevenir la enfermedad entre un 70-80\% y otros mostrando que la vacuna es completamente ineficaz. Problemas potenciales con el uso generalizado de la vacuna BGC en algunas poblaciones es que los sujetos vacunados dan positivo en tuberculosis. Por lo tanto, se vuelve casi imposible detectar la prevalencia de la enfermedad en poblaciones donde la mayoría de habitantes están vacunados contra la enfermedad.
+
+Se han adoptado distintas políticas de vacunación en varias partes del mundo. \textbf{Por ejemplo, en Argentina se inyecta la BGC en recién nacidos y a los 15 años mientras que en Queensland, Australia, se aplica en niños entre 12 y 14 años}{[}ver \ref{old}{]}. En la práctica, la ejecución de una política de vacunación está limitada por muchos factores, como el coste. Los costes pueden aumentar al mezclar los grupos de edad (un recién nacido podría contagiarse de la enfermedad en el hospital). Varias políticas han sido ejecutadas en el pasado y nuestro objetivo será el determinar si estas políticas han sido óptimas en algún sentido.
+
+Consideraremos pues una tasa \(\psi(a)\) de vacunación dependiente de la edad en nuestro modelo con estructura de edad de la tuberculosis y calcularemos el efecto de esa tasa en el número reproductivo del modelo dependiente de la vacunación. La formulación de este modelo de transmisión de enfermedades con estructura de edad no es complicado. El problema reside en que los individuos con tuberculosis que están siendo tratados y los ya vacunados pueden volver a contraer la enfermedad. Denotaremos al número reproductivo dependiente de vacunación como \(\mathscr{R(\psi)}\) y buscaremos una fórmula para \(\mathscr{R(\psi)}\). Daremos condiciones para la estabilidad de un estado libre de infección y para la existencia de un estado endémico. También veremos que, en ausencia de vacuna, el estado libre de infección es globalmente estable si \(\mathscr{R}_0\) (el cual probaremos que es mayor que \(\mathscr{R(\psi)}\)) es menor que uno. También estudiaremos el rol de la BCG en la epidemiología de la estructura de edad de una población. Consideraremos dos problemas de optimización: reducir \(\mathscr{R(\psi)}\) por debajo de un nivel \(\mathscr{R}_*\) a coste mínimo o minimizar \(\mathscr{R(\psi)}\) con recursos limitados. Siguiendo el \textbf{trabajo de Hadeler y Müller} {[}ver \ref{desconocido}{]} mostraremos que la estrategia óptima para los dos problemas anteriores será de la forma ``vacunar a cierta edad'' o ``vacunar exactamente en dos grupos de edad'' .
+
+Este capítulo lo dividiremos de la siguiente manera: En la sección \ref{sec2} introducimos un modelo con estructura de edad para estudiar la dinámica de la tuberculosis en presencia de una vacuna. Los números \(\mathscr{R(\psi)}\) y \(\mathscr{R}_0\) los calcularemos en la sección \ref{sec3}. En esa misma sección veremos algunas propiedades locales de estabilidad del estado libre de infección. En la sección \ref{sec4} estudiaremos las propiedades globales del modelo. En la sección \ref{sec5} aplicaremos nuestros resultados a políticas de vacunación y estudiaremos los dos problemas de optimización planteados anteriormente. En la sección \ref{sec6} discutiremos los resultados y puntos para algún trabajo futuro.
+
+\hypertarget{sec2}{%
+\section{El modelo}\label{sec2}}
+
+Una de las características de la tuberculosis es que el agente infeccioso ha desarrolado una relación simbiótica con el huésped humano; sólo sobre un 10\% de los infectados desarrollan la enfermedad. La mayoría de la gente permanecerá infectada, lo cual puede llevar a una inmunidad parcial duradera a contagiarse más y a una reactivación de la enfermedad por bacilos latentes del contagio inicial. Por este motivo, es importante incluir un periodo de latencia en un modelo de tuberculosis. Como la recaída en la enfermedad es uno de los mayores riesgos a tener en cuenta en la epidemiología etiológica (ciencia centrada en la causalidad de una enfermedad) de la tuberculosis, también tenemos que añadir este factor en nuestro modelo. Por lo tanto, consideraremos que individuos que han recibido tratamiento pueden volver a contagiarse con una tasa de transmisión inferior que individuos susceptibles. Esto ocasionará dificultades en el análisis del modelo.
+
+Para formular un modelos de transmisión de la tuberculosis con estructura de edad introducimos la siguiente notación. La población la dividiremos entre clases de susceptibles, vacunados, expuestos, infecciosos y tratados, donde \(s(t,a)\), \(v(t,a)\), \(l(t,a)\), \(i(t,a)\) y \(j(t,a)\) denota las funciones de densidad asociadas a estas respectivas clases con estructura de edad epidemiológicas. Supondremos que todos los recién nacidos son susceptibles y que la mexcla entre individuos será proporcional a su nivel de actividad dependiente de la edad. También supondremos que un individuo sólo puede contagiarse si ha tenido contacto con algún contagiado, que la vacuna es parcialmente eficaz (es decir, vacunados pueden contagiarse de nuevo pero con una tasa de transmisión inferior), sólo los susceptibles serán vacunados (los identificamos como aquellos que dan negativo al testear si tienen la enfermedad y los expuestos a la enfermedad darán positivo), y que la tasa de mortalidad inducidad por la enfermedad puede ser ignorada. La dinámica conjunta de las clases con estructura de edad epidemiológicas están determinadas por el siguiente problema de valores iniciales:
+
+\begin{equation}
+\begin{split}
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) s(t,a) &= -\beta(a)c(a)B(t)s(t,a)-\mu(a)s(t,a)-\psi(a)s(t,a),                                   \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) v(t,a) &= \psi(a)-s(t,a)-\mu(a)v(t,a)-\delta\beta(a)c(a)B(t)v(t,a) ,                            \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) l(t,a) &= \beta(a)c(a)B(t)(s(t,a)+\sigma j(t,a)+\delta v(t,a)) \\
+& \quad-(k+\mu(a))l(t,a),                \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) i(t,a) &= kl(t,a)-(r+\mu(a))i(t,a),                                                                                       \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right)j(t,a) &= ri(t,a)-\sigma\beta(a)c(a)B(t)j(t,a)-\mu(a)j(t,a),                                    \\
+s(t,0) &= \Lambda,\quad v(t,0)=l(t,0)=i(t,0)=j(t,0)=0,                                \\
+s(0,a) &= s_0(a),\quad v(0,a) = v_0(a),\quad l(0,a) = l_0(a),                         \\
+i(0,a) &= i_0(a),\quad j(0,a)=j_0(a),                                                 \\
+n(t,a) &= s(t,a)+v(t,a)+l(t,a)+i(t,a)+j(t,a)
+\end{split}
+\label{eq:modelo}
+\end{equation}
+
+donde :
+
+\begin{align*}
+B(t) &= \int_0^\infty \frac{i(t,a')}{n(t,a')}p(t,a,a')da',                            \\
+p(t,a,a') &= \frac{c(a')n(t,a')}{\int_0^\infty c(u)n(t,u)du},
+\end{align*}
+
+\(\Lambda\) es la tasa de nacimientos (que suponemos constante); \(\beta(a)\) es la probabilidad media específica a un grupo de edad de contagiarse por contacto con un individuo infectado, \(c(a)\) es la tasa específica a un grupo de edad per cápita de contacto/actividad y \(\mu(a)\) es la tasa específica a un grupo de edad per cápita de mortandad (suponemos que todas estas funciones son continuas e igual a cero a partir de cierta edad máxima); \(k\) es tasa per cápita a la cual un individuo deja de tener la enfermedad latente y pasa a estar infectado y \(r\) es la tasa per cápita de tratamiento; \(\sigma\) y \(\delta\) son la reducción de riesgo de contagio por exposición a la tuberculosis y vacunación, respectivamente, \(0 \leq \sigma \leq 1\), \(0 \leq \delta \leq 1\); y \(p(t,a,a')\) es la probabilidad de que un individuo de edad \(a\) tenga contacto con un individuo de edad \(a'\) que tenga contacto con otro miembro de la población. \textbf{Estamos suponiendo una mezcla proporcional de la población, tal y como han sugerido muchos autores.}{[}ver \ref{sug}{]}. \textbf{Usando el enfoque de Busenberg y Castillo-Chavez} {[}ver \ref{desconocido}{]}, suponemos que \(p(t,a,a')=p(t,a')\) tal y como hemos descrito anteriormente. La distribución inicial de la edad la suponemos conocida y será cero a partir de una edad máxima. \textbf{El modelo (1)}{[}ver \href{eq1}{HACER}{]} está bien definido y \textbf{la prueba es similar a la que se encuentra en {[}7{]}}{[}ver \protect\hyperlink{hacer}{HACER}{]}.
+
+En la siguiente sección, hallaremos una expresión explícita para \(\mathscr{R(\psi)}\), valor que tiene que ser mayor que uno para que la enfermedad sea endémica. En general, \(\mathscr{R(\psi)}\) se conoce como el número reproductivo neto que mide el número esperado de infecciones secundarias producidas por un individuo infectado típico durante su \textbf{entire-death adjusted-period of infectiousness}{[}COMO TRADUCIR ESTO{]} en una población sana.
+
+\hypertarget{sec3}{%
+\section{\texorpdfstring{Cálculo de \(\mathscr{R}(\psi)\) y propiedades locales}{Cálculo de \textbackslash mathscr\{R\}(\textbackslash psi) y propiedades locales}}\label{sec3}}
+
+Veamos que \(n(t,a)\) satisface las siguientes ecuaciones:
+
+\begin{align*}
+\left( \frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) n(t,a) &= -\mu(a)n(t,a) \\
+n(t,0) &= \Lambda  \\
+n(0,a) &= n_0(a) = s_0(a) +v_0(a)+l_0(a)+i_0(a)+j_0(a)
+\end{align*}
+
+Usando el \textbf{método de curvas características} {[}ver \ref{desconocido}{]} podemos obtener \(n\) explícitamente:
+
+\[n(t,a) = n_0(a) \frac{\mathscr{F}(a)}{\mathscr{F}(a-t)} H(a-t) + \Lambda \mathscr{F}(a) H(t-a)\]
+donde
+
+\begin{align*}
+\mathscr{F}(a-t) &= exp \left( -\int_0^a \mu(s) ds \right) , \\
+H(s) &= 
+  \begin{cases}
+  1 \quad si \quad s \geq 0 \\
+  0 \quad  c.c
+  \end{cases}
+\end{align*}
+
+Por tanto,
+
+\begin{equation}
+\begin{split}
+n(t,a) &\xrightarrow[]{t \rightarrow \infty} \Lambda \mathscr{F}(a) \\
+p(t,a) &\xrightarrow[]{t \rightarrow \infty} \frac{c(a) \mathscr{F}(a)}{\int_0^\infty c(b) \mathscr{F}(b) db} := p_\infty(a)
+\end{split}
+\label{eq:limites}
+\end{equation}
+
+Introduciendo las fracciones
+
+\begin{align*}
+u(t,a) &= \frac{s(t,a)}{n(t,a)}, \quad w(t,a) = \frac{v(t,a)}{n(t,a)}, \quad x(t,a) = \frac{l(t,a)}{n(t,a)}, \\
+y(t,a) &= \frac{i(t,a)}{n(t,a)}, \quad z(t,a) = \frac{j(t,a)}{n(t,a)}, 
+\end{align*}
+
+obtenemos un sistema simplificado para nuestro modelo \eqref{eq:modelo}:
+
+\begin{equation}
+\begin{split}
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) u(t,a) &= -\beta(a)c(a)B(t)u(t,a)-\psi(a)u(t,a),                                   \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) w(t,a) &= \psi(a)u(t,a)-\delta\beta(a)c(a)B(t)w(t,a) ,                            \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) x(t,a) &= \beta(a)c(a)B(t)(u(t,a)+\delta w(t,a) + \sigma z(t,a)) - kx(t,a) \\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right) y(t,a) &= kx(t,a)-ry(t,a),\\
+\left(\frac{\partial}{\partial t}+\frac{\partial}{\partial a} \right)z(t,a) &= ry(t,a)-\sigma\beta(a)c(a)B(t)z(t,a),                                    \\
+B(t) &= \int_0^\infty y(t,a)p(t,a)da,                            \\
+p(t,a) &= \frac{c(a)n(t,a)}{\int_0^\infty c(u)n(t,u)du}, \\
+u(t,0) &= 1, \quad w(t,0)=x(t,0)=y(t,0)=z(t,0)=0
+\end{split}
+\label{eq:modsimp}
+\end{equation}
+
+Sea \(\mathscr{F}_\psi (a)\) la probabilidad de que un individuo susceptible no haya sido vacunado a una edad \(a\). Entonces
+\[\mathscr{F}_\psi (a) = exp\left(-\int_0^a \psi(b) db \right).\]
+
+El sistema \eqref{eq:modsimp} tiene el estado libre de infección
+
+\begin{equation}
+\begin{split}
+u(a) &= \mathscr{F}_\psi (a), \quad w(a) = 1 - \mathscr{F}_\psi (a), \quad x(a) = y(a) = z(a) = 0, \\
+n(a) &= \Lambda \mathscr{F}_\psi (a).
+\end{split}
+\label{eq:inflibre}
+\end{equation}
+
+\textbf{A PARTIR DE AQUI SE VUELVO TODO UN POCO UN LIO}
+
+Para estudiar la estabilidad local del equilibrio del estado libre de infección linealizaremos \eqref{eq:modsimp} sobre \eqref{eq:inflibre} y consideraremos soluciones exponenciales de la forma
+\[x(t,a) = X(a)e^{\lambda t}, \quad y(t,a) = Y(a)e^{\lambda t}, \quad B(t) = B_0e^{\lambda t}
+                                                                            + O(e^{2\lambda t})\]
+donde
+
+\begin{equation}
+B_0 = \int_0^\infty Y(a) p_\infty(a) da
+\label{eq:B0}
+\end{equation}
+
+es una constante y \(p_\infty (a)\) es como definimos anteriormente.
+
+\hypertarget{sec4}{%
+\section{Propiedades globales}\label{sec4}}
+
+\hypertarget{sec5}{%
+\section{Estrategias de vacunación óptimas}\label{sec5}}
+
+\hypertarget{sec6}{%
+\section{Resultados}\label{sec6}}
+
+\hypertarget{observaciones}{%
+\section*{Observaciones}\label{observaciones}}
+\addcontentsline{toc}{section}{Observaciones}
+
+\hypertarget{old}{%
+\subsection{Datos antiguos}\label{old}}
+
+Se podrían buscar datos más actuales, no de hace más de 20 años.
+
+\hypertarget{desconocido}{%
+\subsection{Cosas que no conozco}\label{desconocido}}
+
+\begin{itemize}
+\tightlist
+\item
+  Trabajo de Hadeler y Müller.
+\item
+  Enfoque de Besenger y Castillo-Chavez.
+\item
+  Metodo de las curvas caracteristicas.
+\end{itemize}
+
+\hypertarget{sug}{%
+\subsection{Sugerencias}\label{sug}}
+
+\begin{itemize}
+\tightlist
+\item
+  ¿Investigar algo sobre suponer una mezcla proporcional de la población?
+\end{itemize}
+
+  \bibliography{bibliography.bib}
+
+\end{document}
