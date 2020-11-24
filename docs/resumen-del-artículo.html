@@ -216,7 +216,69 @@ donde</p>
 B_0 = \int_0^\infty Y(a) p_\infty(a) da
 \tag{1.5}
 \end{equation}\]</span></p>
-<p>es una constante y <span class="math inline">\(p_\infty (a)\)</span> es como definimos anteriormente.</p>
+<p>es una constante y <span class="math inline">\(p_\infty (a)\)</span> es como definimos anteriormente. Entonces las partes lineales de las ecuaciones de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> son de la forma:</p>
+<p><span class="math display">\[\begin{align*}
+\lambda X(a) + \frac{d}{da}X(a) &amp;= \beta(a)c(a)B_0 \mathscr{V}_\psi (a) - kX(a), \\
+\lambda Y(a) + \frac{d}{da}Y(a) &amp;= kX(a) - rY(a) ,
+\end{align*}\]</span></p>
+<p>donde</p>
+<p><span class="math display" id="eq:Vtonta">\[\begin{equation}
+\mathscr{V}_\psi (a) = \mathscr{F}_\psi (a) + \delta(1- \mathscr{F}_\psi (a))
+\tag{1.6}
+\end{equation}\]</span></p>
+<p>Podemos obtener una expresión para <span class="math inline">\(Y(a)\)</span> resolviendo el sistema anterior:</p>
+<p><span class="math display" id="eq:Ydea">\[\begin{equation}
+Y(a) = B_0 \int_0^a \frac{k}{r-k} \beta(\alpha) c(\alpha) 
+\left(  
+e^{(\lambda + k)(\alpha - a)} - 
+e^{(\lambda + r)(\alpha - a)}
+\right)
+\mathscr{V}_\psi (\alpha) d \alpha
+\tag{1.7}
+\end{equation}\]</span></p>
+<p>De las ecuaciones <a href="resumen-del-artículo.html#eq:B0">(1.5)</a> y <a href="resumen-del-artículo.html#eq:Ydea">(1.7)</a> conseguimos
+<span class="math display" id="eq:troncho">\[\begin{equation}
+B_0 = B_0 \int_0^\infty \int_0^a 
+\frac{k}{r-k} p_\infty (a) \beta(\alpha) c(\alpha) 
+\left(  
+e^{(\lambda + k)(\alpha - a)} - 
+e^{(\lambda + r)(\alpha - a)}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \alpha da
+\tag{1.8}
+\end{equation}\]</span></p>
+<p>Cambiando el orden de integración, definiendo <span class="math inline">\(\tau = a - \alpha\)</span> y dividiendo ambos miembros entre <span class="math inline">\(B_0\)</span> la ecuación <a href="resumen-del-artículo.html#eq:troncho">(1.8)</a> obtenemos la ecuación característica</p>
+<p><span class="math display" id="eq:troncho2">\[\begin{equation}
+1 = \int_0^\infty \int_0^\infty 
+\frac{k}{r-k} p_\infty (\alpha + \tau) \beta(\alpha) c(\alpha) 
+\left(  
+e^{-(\lambda + k) \tau} - 
+e^{-(\lambda + r) \tau}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \tau  d \alpha
+: = G(\lambda).
+\tag{1.9}
+\end{equation}\]</span></p>
+<p>De esta manera, definimos el número reproductivo neto como <span class="math inline">\(\mathscr{R}(\psi) = G(0)\)</span>, i.e.,
+<span class="math display" id="eq:Rdepsi">\[\begin{equation}
+\mathscr{R}(\psi) = 
+\int_0^\infty \int_0^\infty 
+\frac{k}{r-k} p_\infty (\alpha + \tau) \beta(\alpha) c(\alpha) 
+\left(  
+e^{-k \tau} - 
+e^{-r \tau}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \tau  d \alpha,
+\tag{1.10}
+\end{equation}\]</span>
+y damos el siguiente resultado.</p>
+<p>TEOREMA
+El estado libre de infección <span class="math inline">\(\mathscr{R}(\psi)\)</span> es localmente asintóticamente estable (l.a.e.) si <span class="math inline">\(\mathscr{R}(\psi) &lt; 1\)</span> e inestable si <span class="math inline">\(\mathscr{R}(\psi) &gt; 1\)</span></p>
+<p>PRUEBA
+Trivial. Mentira. Tan solo quiero crear el hueco y ya hacerlo en otro momento.</p>
 </div>
 <div id="sec4" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Propiedades globales</h2>

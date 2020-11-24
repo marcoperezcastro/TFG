@@ -103,7 +103,7 @@
       \parskip=0pt
       \Huge\bfseries
       \begin{center}
-          \leavevmode\includegraphics[totalheight=6cm]{sello.png}\\[2cm]
+          \leavevmode\includegraphics[totalheight=6cm]{sello.pdf}\\[2cm]
           \@title
       \end{center}
       \vspace{1cm}
@@ -119,7 +119,7 @@
   \setlength\baselineskip{0pt}
   \setlength\parskip{0mm}
   \begin{center}
-      \leavevmode\includegraphics[totalheight=4.5cm]{sello.png}
+      \leavevmode\includegraphics[totalheight=4.5cm]{sello.pdf}
   \end{center}
   \end{flushleft}
   \vspace{1cm}
@@ -296,7 +296,7 @@
 
 \title{Modelos de transmisión de enfermedades con estructura de edad}
 \author{Marco Pérez Castro}
-\date{Compilidado por última vez el 23 de noviembre a las 17:48, 2020}
+\date{Compilidado por última vez el 24 de noviembre a las 20:41, 2020}
 
 \begin{document}
 \maketitle
@@ -311,6 +311,10 @@
 
 \begin{itemize}
 \tightlist
+\item
+  Entornos de teorema y prueba no admiten ~mathscr
+\item
+  Geometria del pdf
 \item
   En el PDF, cuando pincho en `modelo', me lleva a la pagina 1 del pdf.
 \item
@@ -492,7 +496,80 @@ B_0 = \int_0^\infty Y(a) p_\infty(a) da
 \label{eq:B0}
 \end{equation}
 
-es una constante y \(p_\infty (a)\) es como definimos anteriormente.
+es una constante y \(p_\infty (a)\) es como definimos anteriormente. Entonces las partes lineales de las ecuaciones de \(x\) e \(y\) son de la forma:
+
+\begin{align*}
+\lambda X(a) + \frac{d}{da}X(a) &= \beta(a)c(a)B_0 \mathscr{V}_\psi (a) - kX(a), \\
+\lambda Y(a) + \frac{d}{da}Y(a) &= kX(a) - rY(a) ,
+\end{align*}
+
+donde
+
+\begin{equation}
+\mathscr{V}_\psi (a) = \mathscr{F}_\psi (a) + \delta(1- \mathscr{F}_\psi (a))
+\label{eq:Vtonta}
+\end{equation}
+
+Podemos obtener una expresión para \(Y(a)\) resolviendo el sistema anterior:
+
+\begin{equation}
+Y(a) = B_0 \int_0^a \frac{k}{r-k} \beta(\alpha) c(\alpha) 
+\left(  
+e^{(\lambda + k)(\alpha - a)} - 
+e^{(\lambda + r)(\alpha - a)}
+\right)
+\mathscr{V}_\psi (\alpha) d \alpha
+\label{eq:Ydea}
+\end{equation}
+
+De las ecuaciones \eqref{eq:B0} y \eqref{eq:Ydea} conseguimos
+\begin{equation}
+B_0 = B_0 \int_0^\infty \int_0^a 
+\frac{k}{r-k} p_\infty (a) \beta(\alpha) c(\alpha) 
+\left(  
+e^{(\lambda + k)(\alpha - a)} - 
+e^{(\lambda + r)(\alpha - a)}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \alpha da
+\label{eq:troncho}
+\end{equation}
+
+Cambiando el orden de integración, definiendo \(\tau = a - \alpha\) y dividiendo ambos miembros entre \(B_0\) la ecuación \eqref{eq:troncho} obtenemos la ecuación característica
+
+\begin{equation}
+1 = \int_0^\infty \int_0^\infty 
+\frac{k}{r-k} p_\infty (\alpha + \tau) \beta(\alpha) c(\alpha) 
+\left(  
+e^{-(\lambda + k) \tau} - 
+e^{-(\lambda + r) \tau}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \tau  d \alpha
+: = G(\lambda).
+\label{eq:troncho2}
+\end{equation}
+
+De esta manera, definimos el número reproductivo neto como \(\mathscr{R}(\psi) = G(0)\), i.e.,
+\begin{equation}
+\mathscr{R}(\psi) = 
+\int_0^\infty \int_0^\infty 
+\frac{k}{r-k} p_\infty (\alpha + \tau) \beta(\alpha) c(\alpha) 
+\left(  
+e^{-k \tau} - 
+e^{-r \tau}
+\right)
+\mathscr{V}_\psi (\alpha) 
+d \tau  d \alpha,
+\label{eq:Rdepsi}
+\end{equation}
+y damos el siguiente resultado.
+
+TEOREMA
+El estado libre de infección \(\mathscr{R}(\psi)\) es localmente asintóticamente estable (l.a.e.) si \(\mathscr{R}(\psi) < 1\) e inestable si \(\mathscr{R}(\psi) > 1\)
+
+PRUEBA
+Trivial. Mentira. Tan solo quiero crear el hueco y ya hacerlo en otro momento.
 
 \hypertarget{sec4}{%
 \section{Propiedades globales}\label{sec4}}
